@@ -6,8 +6,115 @@
   <title>Micro Nutritions</title>
   <link rel="canonical" href="https://micronutritions.org/">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .construction-banner {
+      background-color: #ffd700;
+      color: #000;
+      text-align: center;
+      padding: 15px;
+      font-weight: bold;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .scrolling-text {
+      background-color: rgba(255, 215, 0, 0.1);
+      color: #333;
+      padding: 8px;
+      margin-top: 10px;
+      border-radius: 4px;
+      overflow: hidden;
+      white-space: nowrap;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+    
+    .scrolling-text span {
+      display: inline-block;
+      animation: scroll 20s linear infinite;
+      font-weight: 500;
+    }
+    
+    @keyframes scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    
+    .product-card {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .product-card:hover {
+      transform: scale(1.05);
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+    }
+    
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 800px;
+      border-radius: 8px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .close-modal {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+    }
+    
+    .product-details {
+      margin-top: 20px;
+    }
+    
+    .product-details table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    
+    .product-details th, .product-details td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    
+    .product-details th {
+      background-color: #f5f5f5;
+      font-weight: bold;
+    }
+    
+    .product-details tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  </style>
 </head>
 <body>
+  <div class="construction-banner">
+    🚧 Website Under Construction - Coming Soon! 🚧
+  </div>
   <header>
     <div class="container nav-container">
       <div class="logo">Micro Nutritions</div>
@@ -25,7 +132,10 @@
     <div class="hero-bg-animated"></div>
     <div class="container">
       <h1 class="hero-title">Empowering Health, Delivering Trust</h1>
-      <div class="hero-quote" id="hero-quote">“Your health is our greatest priority.”</div>
+      <div class="hero-quote" id="hero-quote">"Your health is our greatest priority."</div>
+      <div class="scrolling-text">
+        <span>🚧 Website Under Construction - We're working on something amazing! Stay tuned for updates 🚧</span>
+      </div>
       <p class="hero-mission">At Micro Nutritions, we are dedicated to providing high-quality, reliable medicines and nutritional products to support healthier communities. Our commitment is to excellence, integrity, and care in every product we deliver.</p>
       <a href="#products" class="hero-cta">Explore Products</a>
     </div>
@@ -294,6 +404,15 @@
     </div>
   </footer>
 
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div class="product-details" id="productDetails">
+        <!-- Content will be dynamically inserted here -->
+      </div>
+    </div>
+  </div>
+
   <script>
   const quotes = [
     "“Your health is our greatest priority.”",
@@ -306,6 +425,115 @@
     quoteIdx = (quoteIdx + 1) % quotes.length;
     document.getElementById('hero-quote').textContent = quotes[quoteIdx];
   }, 3500);
+
+  // Product details data
+  const productDetails = {
+    'Axoleo drops': {
+      name: 'Axoleo Drops 15ML',
+      description: 'A comprehensive multivitamin supplement for overall health and wellness.',
+      composition: 'Vitamin A, B Complex, C, D, E, and essential minerals',
+      dosage: '1-2 drops daily or as prescribed by physician',
+      indications: 'General health maintenance, Vitamin deficiency',
+      contraindications: 'Hypersensitivity to any of the ingredients',
+      sideEffects: 'Rare cases of gastrointestinal discomfort',
+      storage: 'Store in a cool, dry place away from direct sunlight',
+      manufacturer: 'Micro Nutritions',
+      mrp: '₹299'
+    },
+    'Ferol drops': {
+      name: 'Ferol Drops 15ML',
+      description: 'Iron supplement for the treatment and prevention of iron deficiency anemia.',
+      composition: 'Ferrous Ascorbate, Folic Acid, Vitamin B12',
+      dosage: '1-2 drops daily or as prescribed by physician',
+      indications: 'Iron deficiency anemia, Pregnancy',
+      contraindications: 'Hemochromatosis, Iron overload disorders',
+      sideEffects: 'May cause constipation or dark stools',
+      storage: 'Store in a cool, dry place',
+      manufacturer: 'Micro Nutritions',
+      mrp: '₹249'
+    },
+    'Carmipep drops': {
+      name: 'Carmipep Drops 15ML',
+      description: 'Digestive enzyme supplement for improved digestion and gut health.',
+      composition: 'Pancreatin, Papain, Diastase',
+      dosage: '1-2 drops before meals',
+      indications: 'Digestive disorders, Enzyme deficiency',
+      contraindications: 'Acute pancreatitis',
+      sideEffects: 'Rare cases of allergic reactions',
+      storage: 'Store below 30°C',
+      manufacturer: 'Micro Nutritions',
+      mrp: '₹199'
+    }
+  };
+
+  // Function to create product details table
+  function createProductTable(product) {
+    return `
+      <h2>${product.name}</h2>
+      <p><strong>Description:</strong> ${product.description}</p>
+      <table>
+        <tr>
+          <th>Composition</th>
+          <td>${product.composition}</td>
+        </tr>
+        <tr>
+          <th>Dosage</th>
+          <td>${product.dosage}</td>
+        </tr>
+        <tr>
+          <th>Indications</th>
+          <td>${product.indications}</td>
+        </tr>
+        <tr>
+          <th>Contraindications</th>
+          <td>${product.contraindications}</td>
+        </tr>
+        <tr>
+          <th>Side Effects</th>
+          <td>${product.sideEffects}</td>
+        </tr>
+        <tr>
+          <th>Storage</th>
+          <td>${product.storage}</td>
+        </tr>
+        <tr>
+          <th>Manufacturer</th>
+          <td>${product.manufacturer}</td>
+        </tr>
+        <tr>
+          <th>MRP</th>
+          <td>${product.mrp}</td>
+        </tr>
+      </table>
+    `;
+  }
+
+  // Add click event listeners to product cards
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', function() {
+      const productName = this.querySelector('span').textContent;
+      const modal = document.getElementById('productModal');
+      const detailsDiv = document.getElementById('productDetails');
+      
+      if (productDetails[productName]) {
+        detailsDiv.innerHTML = createProductTable(productDetails[productName]);
+        modal.style.display = 'block';
+      }
+    });
+  });
+
+  // Close modal functionality
+  document.querySelector('.close-modal').addEventListener('click', function() {
+    document.getElementById('productModal').style.display = 'none';
+  });
+
+  // Close modal when clicking outside
+  window.addEventListener('click', function(event) {
+    const modal = document.getElementById('productModal');
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
   </script>
 
   <!-- Add Font Awesome for icons -->
